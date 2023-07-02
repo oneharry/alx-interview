@@ -6,8 +6,11 @@ Pascal Triangle
 
 def pascal_triangle(n):
     """Implement pascal triangle"""
+
+    if n <= 0:
+        return [];
     outer_list = []
-    
+
     for x in range(n):
         inner_list = []
         for i in range(x + 1):
