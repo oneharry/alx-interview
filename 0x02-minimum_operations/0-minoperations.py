@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """ Minimum operation """
 
+
 def minOperations(n: int) -> int:
     if n == 1:
         return 0
