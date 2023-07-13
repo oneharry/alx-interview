@@ -1,8 +1,9 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """ Minimum operation """
 
 
 def minOperations(n: int) -> int:
+    """Returns the minimun number of operation to reach n(H)"""
     if n == 1:
         return 0
 
