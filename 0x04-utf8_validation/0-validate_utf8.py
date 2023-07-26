@@ -11,6 +11,6 @@ def validUTF8(data):
     for x in data:
         if type(x) is not int:
             return
-        if x > 127:
+        if (x.bit_length() > 7):
             return False
     return True
