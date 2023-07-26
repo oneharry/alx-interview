@@ -6,11 +6,7 @@ def validUTF8(data):
     """Implement calidate UTF-8
     return True if data is a valid UTF-8 encoding
     False otherwise"""
-    if type(data) is not list:
-        return
     for x in data:
-        if type(x) is not int:
-            return
-        if (x.bit_length() > 7):
+        if x.bit_length() > 7:
             return False
     return True
