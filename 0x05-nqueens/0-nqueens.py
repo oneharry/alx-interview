@@ -43,7 +43,7 @@ def utils_queens(board, column, N, sol_list):
 
 def n_queens(N):
     """Implementation of n queens"""
-    if not isinstance(N, int):
+    if not isinstance(eval(N), int):
         print("N must be a number")
         sys.exit(1)
 
