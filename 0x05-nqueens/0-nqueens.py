@@ -3,9 +3,7 @@
 import sys
 
 def print_queens(sol):
-    for pos in sol:
-        print(pos, end=" ")
-    print()
+    print(sol)
 
 def isMatch(board, row, column):
     """Function determines if queens are compatible"""
@@ -54,7 +52,9 @@ def n_queens(N):
     sol_list = []
     utils_queens(board, 0, N, sol_list)
 
-    for sol in sol_list:
+    for i, sol in enumerate(sol_list):
+        if i >= 2:  # Prints only the first two solutions
+            break
         print_queens(sol)
     return True
 
