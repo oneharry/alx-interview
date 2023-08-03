@@ -2,10 +2,9 @@
 """ Module implementing N Queens """
 import sys
 
+
 def print_queens(sol):
-    for pos in sol:
-        print(pos, end=" ")
-    print()
+    print(sol)
 
 def isMatch(board, row, column):
     """Function determines if queens are compatible"""
@@ -41,9 +40,9 @@ def utils_queens(board, column, N, sol_list):
 
 def n_queens(N):
     """Solves the N queens"""
-    if not N.isdigit():
+    """if eval(N) != 'number':
         print("N must be a number")
-        sys.exit(1)
+        sys.exit(1)"""
 
     N = int(N)
     if N < 4:
@@ -57,6 +56,7 @@ def n_queens(N):
     for sol in sol_list:
         print_queens(sol)
     return True
+
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
