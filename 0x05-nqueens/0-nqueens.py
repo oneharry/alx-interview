@@ -2,7 +2,12 @@
 """ Module implementing N Queens """
 import sys
 
-def isMatch(board, row, column, N):
+def print_queens(sol):
+    for pos in sol:
+        print(pos, end=" ")
+    print()
+
+def isMatch(board, row, column):
     """Function determines if queens are compatible"""
     for x in range(row):
         if board[x][column] == 1:
@@ -12,29 +17,30 @@ def isMatch(board, row, column, N):
         if board[x][y] == 1:
             return False
 
-    for x, y in zip(range(row, N), range(column, -1, -1)):
+    for x, y in zip(range(row, len(board)), range(column, -1, -1)):
         if board[x][y] == 1:
             return False
     return True
 
-def utils_queens(board, row, N, sol_list, cur_sol):
+def utils_queens(board, column, N, sol_list):
     """Check that all cases are placed"""
-    if row == N:
-        sol_list.append(cur_sol[:])
+    if column >= N:
+        sol = []
+        for i in range(N):
+            for j in range(N):
+                if board[i][j] == 1:
+                    sol.append([i, j])
+        sol_list.append(sol)
         return
 
     for x in range(N):
-        if isMatch(board, row, x, N):
-            board[row][x] = 1
-            cur_sol.append(x)
-            utils_queens(board, row + 1, N, sol_list, cur_sol)
-            cur_sol.pop()
-            board[row][x] = 0
+        if isMatch(board, x, column):
+            board[x][column] = 1
+            utils_queens(board, column + 1, N, sol_list)
+            board[x][column] = 0
 
-def test(n, x=[], b=[], c=[]):
-    if i < n:
 def n_queens(N):
-    """SOlves the N queens"""
+    """Solves the N queens"""
     if not N.isdigit():
         print("N must be a number")
         sys.exit(1)
@@ -44,19 +50,16 @@ def n_queens(N):
         print("N must be at least 4")
         sys.exit(1)
 
-    sol_list = []
-    cur_sol = []
     board = [[0 for _ in range(N)] for _ in range(N)]
-    utils_queens(board, 0, N, sol_list, cur_sol)
+    sol_list = []
+    utils_queens(board, 0, N, sol_list)
 
     for sol in sol_list:
-        temp = [[y, sol[y]] for y in range(N)]
-        print(temp)
-    print()
-
+        print_queens(sol)
+    return True
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
         print("Usage: nqueens N")
         sys.exit(1)
-    n_queens(sys.argv[1])
+    n_queens(4)
