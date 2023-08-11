@@ -4,14 +4,10 @@ const request = require('request');
 const url = `https://swapi-api.hbtn.io/api/films/${process.argv[2]}`;
 
 request(url, (err, res, body) => {
-  if (err){
-    console.log('Error', err);
-    throw err;
-  }
-  else {
-    const chars = JSON.parse(body).characters;
-    printChars(chars, 0);
-  }
+  if(err) throw err;
+  
+  const chars = JSON.parse(body).characters;
+  printChars(chars, 0);
 });
 
 const printChars = (chars, num) => {
