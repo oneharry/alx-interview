@@ -1,15 +1,13 @@
 #!/usr/bin/node
 const request = require('request')
-const movieId = proccess.argv[2]
+const movieId = process.argv[2]
 
-const params = {
-    url: `https://swapi-api.hbtn.io/api/films/${movieId}`,
-    method: 'GET'
-}
+url: `https://swapi-api.hbtn.io/api/films/${movieId}`,
 
-request(params, (err, res, body) => {
+request(url, (err, res, body) => {
     if (err) {
         console.log("Error", err);
+        throw err
     }
     else {
         const chars = JSON.parse(body).characters;
