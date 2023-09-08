@@ -3,7 +3,6 @@
 
 
 def isWinner(x, nums):
-    """Determine winner"""
     def is_prime(num):
         if num <= 1:
             return False
@@ -34,8 +33,8 @@ def isWinner(x, nums):
             winners["Maria" if n % 2 == 0 else "Ben"] += 1
 
     if winners["Maria"] > winners["Ben"]:
-        return "Ben"
-    elif winners["Ben"] > winners["Maria"]:
         return "Maria"
+    elif winners["Ben"] > winners["Maria"]:
+        return "Ben"
     else:
         return None
