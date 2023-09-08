@@ -3,34 +3,39 @@
 
 
 def isWinner(x, nums):
-    def is_prime(num):
-        if num <= 1:
-            return False
-        for i in range(2, int(num ** 0.5) + 1):
-            if num % i == 0:
-                return False
-        return True
+    def calculate_primes(n):
+        is_prime = [True] * (n + 1)
+        is_prime[0] = is_prime[1] = False
+        p = 2
+        while p * p <= n:
+            if is_prime[p]:
+                for i in range(p * p, n + 1, p):
+                    is_prime[i] = False
+            p += 1
+        primes = [i for i in range(2, n + 1) if is_prime[i]]
+        return primes
 
-    def canWin(n, memo):
+    def canWin(n, primes, memo):
         if n in memo:
             return memo[n]
 
-        if n == 1:
-            memo[n] = False
-        else:
-            memo[n] = False
-            for i in range(2, n):
-                if is_prime(i) and n % i == 0 and not canWin(n - i, memo):
-                    memo[n] = True
-                    break
+        for prime in primes:
+            if prime > n:
+                break
+            if not canWin(n - prime, primes, memo):
+                memo[n] = True
+                return True
 
-        return memo[n]
+        memo[n] = False
+        return False
 
     winners = {"Maria": 0, "Ben": 0}
+    max_num = max(nums)
+    primes = calculate_primes(max_num)
 
     for n in nums:
-        if canWin(n, {}):
-            winners["Maria" if n % 2 == 0 else "Ben"] += 1
+        if canWin(n, primes, {}):
+            winners["Maria" if n % 2 == 1 else "Ben"] += 1
 
     if winners["Maria"] > winners["Ben"]:
         return "Maria"
