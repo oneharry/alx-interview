@@ -35,7 +35,7 @@ def isWinner(x, nums):
 
     for n in nums:
         if canWin(n, primes, {}):
-            winners["Maria" if n % 2 == 0 else "Ben"] += 1
+            winners["Maria" if n % 2 == 1 else "Ben"] += 1
 
     if winners["Maria"] > winners["Ben"]:
         return "Maria"
