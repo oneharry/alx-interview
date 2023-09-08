@@ -3,7 +3,10 @@
 
 
 def isWinner(x, nums):
-    def calculate_primes(n):
+    if x <= 0 or nums is None or x != len(nums):
+        return None
+
+    def sieve_eratosthenes(n):
         is_prime = [True] * (n + 1)
         is_prime[0] = is_prime[1] = False
         p = 2
@@ -12,34 +15,31 @@ def isWinner(x, nums):
                 for i in range(p * p, n + 1, p):
                     is_prime[i] = False
             p += 1
-        primes = [i for i in range(2, n + 1) if is_prime[i]]
-        return primes
+        return is_prime
 
-    def canWin(n, primes, memo):
-        if n in memo:
-            return memo[n]
-
-        for prime in primes:
-            if prime > n:
+    def remove_multiples(primes, x):
+        n = len(primes)
+        for i in range(2, n):
+            if i * x < n:
+                primes[i * x] = False
+            else:
                 break
-            if not canWin(n - prime, primes, memo):
-                memo[n] = True
-                return True
 
-        memo[n] = False
-        return False
+    ben = 0
+    maria = 0
 
-    winners = {"Maria": 0, "Ben": 0}
     max_num = max(nums)
-    primes = calculate_primes(max_num)
-
-    for n in nums:
-        if canWin(n, primes, {}):
-            winners["Maria" if n % 2 == 1 else "Ben"] += 1
-
-    if winners["Maria"] > winners["Ben"]:
-        return "Maria"
-    elif winners["Ben"] > winners["Maria"]:
+    primes = sieve_eratosthenes(max_num)
+    
+    for i in nums:
+        if sum(primes[0:i + 1]) % 2 == 0:
+            ben += 1
+        else:
+            maria += 1
+    
+    if ben > maria:
         return "Ben"
-    else:
-        return None
+    if maria > ben:
+        return "Maria"
+    
+    return None
