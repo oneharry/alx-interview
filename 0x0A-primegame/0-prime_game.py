@@ -3,10 +3,12 @@
 
 
 def isWinner(x, nums):
+    """ Determine the winner """
     if x <= 0 or nums is None or x != len(nums):
         return None
 
     def sieve_eratosthenes(n):
+        """ Implement sieve"""
         is_prime = [True] * (n + 1)
         is_prime[0] = is_prime[1] = False
         p = 2
@@ -18,6 +20,7 @@ def isWinner(x, nums):
         return is_prime
 
     def remove_multiples(primes, x):
+        """ Implement remove multiples"""
         n = len(primes)
         for i in range(2, n):
             if i * x < n:
