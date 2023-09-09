@@ -33,16 +33,16 @@ def isWinner(x, nums):
 
     max_num = max(nums)
     primes = sieve_eratosthenes(max_num)
-    
+
     for i in nums:
         if sum(primes[0:i + 1]) % 2 == 0:
             ben += 1
         else:
             maria += 1
-    
+
     if ben > maria:
         return "Ben"
     if maria > ben:
         return "Maria"
-    
+
     return None
